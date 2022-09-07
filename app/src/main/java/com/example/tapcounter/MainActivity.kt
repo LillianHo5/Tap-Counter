@@ -9,6 +9,7 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     var counter = 0
+    private var incrementBy = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,21 +20,20 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             //Toast.makeText(it.context, "Clicked Button!", Toast.LENGTH_SHORT).show()
-            counter++
+            counter += incrementBy;
             textView.text = counter.toString()
             // when the counter hits 100, show the upgrade button
             if (counter >= 100) {
                 // set upgrade button visibility to visible
-                upgradeButton.visibility = View.VISIBLE
+                if(incrementBy == 1) {
+                    upgradeButton.visibility = View.VISIBLE
+                }
             }
         }
 
         upgradeButton.setOnClickListener {
             // when upgrade button is clicked, starfish button adds 2 everytime
-            button.setOnClickListener {
-                counter += 2
-                textView.text = counter.toString()
-            }
+            incrementBy = 2
             // set upgradeButton to invisible after the upgrade has been made
             upgradeButton.visibility = View.INVISIBLE
         }
